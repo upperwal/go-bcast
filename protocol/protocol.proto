@@ -1,0 +1,36 @@
+syntax = "proto3";
+package protocol;
+
+message Protocol {
+    enum Type {
+        CONTROL_REQ = 0;
+        CONTROL_RES = 1;
+        DATA_PACKET = 2;
+    }
+
+    message ControlReq {
+        enum Type {
+            GET_NEIGHBOURS = 0;
+        }
+        Type type = 1;
+    }
+    
+    message ControlRes {
+        int64 from = 1;
+        string data = 2;
+    }
+
+    message DataPacket {
+        enum Type {
+            BROADCAST = 0;
+        }
+        Type type = 1;
+        string data = 2;
+    }
+
+    Type type = 1;
+    DataPacket dataPacket = 2;
+    ControlReq controlReq = 3;
+    ControlRes controlRes = 4;
+
+}
